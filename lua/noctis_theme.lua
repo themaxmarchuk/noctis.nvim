@@ -1,6 +1,17 @@
 local highlight = vim.api.nvim_set_hl;
 
+--- @class NoctisConfig
+local noc_config = {
+  -- whether to use italics for non-italics groups
+  -- (e.g. for comments), etc.
+  italics = true
+}
+
 return {
+  --- @param config NoctisConfig
+  setup = function(config)
+    noc_config = vim.tbl_deep_extend('force', noc_config, config or {})
+  end,
   from_palette = function(palette, override)
     local highlight_groups = {
       Fg                          = { fg=palette.fg,         bg=palette.none },
@@ -132,16 +143,16 @@ return {
       Float                       = { fg=palette.purple,     bg=palette.none },
       NormalFloat                 = { link='Pmenu' },
       FloatBorder                 = { link='Pmenu' },
-      PreProc                     = { fg=palette.purple,     bg=palette.none, italic=true },
-      PreCondit                   = { fg=palette.purple,     bg=palette.none, italic=true },
-      Include                     = { fg=palette.purple,     bg=palette.none, italic=true },
-      Define                      = { fg=palette.purple,     bg=palette.none, italic=true },
+      PreProc                     = { fg=palette.purple,     bg=palette.none, italic=noc_config.italics },
+      PreCondit                   = { fg=palette.purple,     bg=palette.none, italic=noc_config.italics },
+      Include                     = { fg=palette.purple,     bg=palette.none, italic=noc_config.italics },
+      Define                      = { fg=palette.purple,     bg=palette.none, italic=noc_config.italics },
       Conditional                 = { fg=palette.red,        bg=palette.none, bold=true },
       Repeat                      = { fg=palette.red,        bg=palette.none, bold=true },
-      Keyword                     = { fg=palette.red,        bg=palette.none, italic=true },
-      Typedef                     = { fg=palette.red,        bg=palette.none, italic=true },
-      Exception                   = { fg=palette.red,        bg=palette.none, italic=true },
-      Statement                   = { fg=palette.red,        bg=palette.none, italic=true },
+      Keyword                     = { fg=palette.red,        bg=palette.none, italic=noc_config.italics },
+      Typedef                     = { fg=palette.red,        bg=palette.none, italic=noc_config.italics },
+      Exception                   = { fg=palette.red,        bg=palette.none, italic=noc_config.italics },
+      Statement                   = { fg=palette.red,        bg=palette.none, italic=noc_config.italics },
       StorageClass                = { fg=palette.orange,     bg=palette.none, bold=true },
       Title                       = { fg=palette.orange,     bg=palette.none, bold=true },
       Type                        = { fg=palette.yellow,     bg=palette.none, bold=true },
@@ -159,9 +170,9 @@ return {
       Identifier                  = { fg=palette.blue,       bg=palette.none },
       SpecialKey                  = { fg=palette.blue,       bg=palette.none },
       String                      = { fg=palette.green,      bg=palette.none },
-      Comment                     = { fg=palette.light_grey, bg=palette.none, italic=true },
-      SpecialComment              = { fg=palette.light_grey, bg=palette.none, italic=true },
-      Todo                        = { fg=palette.purple,     bg=palette.none, italic=true },
+      Comment                     = { fg=palette.light_grey, bg=palette.none, italic=noc_config.italics },
+      SpecialComment              = { fg=palette.light_grey, bg=palette.none, italic=noc_config.italics },
+      Todo                        = { fg=palette.purple,     bg=palette.none, italic=noc_config.italics },
       Delimiter                   = { fg=palette.fg,         bg=palette.none },
       Debug                       = { fg=palette.yellow,     bg=palette.none },
 
